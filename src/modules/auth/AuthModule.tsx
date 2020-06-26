@@ -3,8 +3,8 @@ import { Redirect, Route, Switch, useHistory } from 'react-router-dom'
 import SignIn from './routes/sign-in/SignIn'
 import { ForgotPassword } from './routes/forgot-password/ForgotPassword'
 import { ForgotPasswordSuccess } from './routes/forgot-password/forgot-password-success/ForgotPasswordSuccess'
-import { ResetPassword } from './routes/reset-password/ResetPassword'
 import SignUp from './routes/sign-up/SignUp'
+import ResetPassword from './routes/reset-password/ResetPassword'
 
 export const AuthModule = () => {
 

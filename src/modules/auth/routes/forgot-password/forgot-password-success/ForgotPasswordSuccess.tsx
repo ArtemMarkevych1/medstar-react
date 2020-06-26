@@ -2,13 +2,16 @@ import React from 'react'
 import Container from '@material-ui/core/Container'
 import { Link } from 'react-router-dom'
 import { forgotPasswordStylesSuccess } from './forgotPasswordSuccess.style'
+import Typography from '@material-ui/core/Typography'
 
 export const ForgotPasswordSuccess = () => {
 	const classes = forgotPasswordStylesSuccess()
 
 	return (
 		<Container component="main" maxWidth="xs" className={classes.root}>
-			<h1 className={classes.mainTitle}>Forgot Password</h1>
+			<Typography component="h1" variant="h5" className={ classes.mainTitle }>
+				Forgot Password
+			</Typography>
 			<div className={ classes.wrapper }>
 				<div className={ classes.response }>
 					<p>

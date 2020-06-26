@@ -1,79 +1,59 @@
 import React from 'react'
-import {
-	Button,
-	FormControl,
-	Input,
-	InputAdornment,
-	Tooltip
-} from '@material-ui/core'
-import { Info, VpnKey } from '@material-ui/icons'
-import { ressetPasswordStyles } from './resetPassword.style'
-import TooltipText from './ToolTip'
-// import { useLocation, useHistory } from 'react-router-dom'
+import Avatar from '@material-ui/core/Avatar'
+import Button from '@material-ui/core/Button'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import TextField from '@material-ui/core/TextField'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Checkbox from '@material-ui/core/Checkbox'
+import Link from '@material-ui/core/Link'
+import Grid from '@material-ui/core/Grid'
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
+import Typography from '@material-ui/core/Typography'
+import Container from '@material-ui/core/Container'
+import { resetPassword } from './resetPassword.style'
 
-export const ResetPassword = () => {
-	const classes = ressetPasswordStyles()
-	// const location = useLocation()
-	// const history = useHistory()
-	// const [ resetToken, setResetToken ] = useState( '' )
-
-	// useEffect( () => {
-	// 	const params = new URLSearchParams( location.search )
-	// 	const resetToken = params.get( 'resetToken' )
-	// 	resetToken && resetToken.length === 3 ? setResetToken( resetToken ) : history.push( '/auth/sign-in' )
-	// }, [] )
-
+export default function ResetPassword() {
+	const classes = resetPassword()
 
 	return (
-		<div className={ classes.authForm }>
-			<h3 style={ { color: '#2D3054' } }>Create New Password*</h3>
-			<FormControl className={ classes.root }>
-				<Input
-					className={ classes.formInput }
-					placeholder='New Password'
-					id='password'
-					startAdornment={
-						<InputAdornment position='start'>
-							<VpnKey style={ { color: 'EFEFF6' } }/>
-						</InputAdornment>
-					}
-					endAdornment={
-						<InputAdornment position='end'>
-							<Tooltip
-								title={ <TooltipText/> }
-								placement='right-start'
-								classes={ { tooltip: classes.customTool } }
-							>
-								<Info style={ { color: 'EFEFF6' } }/>
-							</Tooltip>
-						</InputAdornment>
-					}
-				/>
-				<Input
-					className={ classes.formInput }
-					placeholder='Repeat New Password'
-					id='new-password'
-					startAdornment={
-						<InputAdornment position='start'>
-							<VpnKey style={ { color: 'EFEFF6' } }/>
-						</InputAdornment>
-					}
-					endAdornment={
-						<InputAdornment position='end'>
-							<Tooltip
-								title={ <TooltipText/> }
-								placement='right-start'
-								classes={ { tooltip: classes.customTool } }
-							>
-								<Info style={ { color: 'EFEFF6' } }/>
-							</Tooltip>
-						</InputAdornment>
-					}
-				/>
-			</FormControl>
-			<Button className={ classes.btnSubmit } variant='contained'>
-				Save
-			</Button>
-		</div>
+		<Container component="main" maxWidth="xs">
+			<CssBaseline/>
+			<div className={ classes.paper }>
+				<Typography component="h1" variant="h5">
+					Create New Password*
+				</Typography>
+				<form className={ classes.form } noValidate>
+					<TextField
+						variant="outlined"
+						margin="normal"
+						required
+						fullWidth
+						name="password"
+						label="New Password"
+						type="password"
+						id="password"
+					/>
+					<TextField
+						variant="outlined"
+						margin="normal"
+						required
+						fullWidth
+						name="password"
+						label="Repeat New Password"
+						type="password"
+						id="password"
+					/>
+					<Button
+						type="submit"
+						fullWidth
+						variant="contained"
+						className={ classes.submit }
+					>
+						Save
+					</Button>
+				</form>
+			</div>
+		</Container>
 	)
 }
+

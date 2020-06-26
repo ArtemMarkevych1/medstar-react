@@ -38,11 +38,7 @@ export const forgotPasswordStyles = makeStyles( ( theme: Theme ) =>
 			color: '#0462bf'
 		},
 		mainTitle: {
-			fontSize: '1.5rem',
-			fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-			fontWeight: 400,
-			lineHeight: 1.33,
-			letterSpacing: '0em',
+			marginBottom: '10px'
 		},
 		wrapper:{
 			padding: '16px',

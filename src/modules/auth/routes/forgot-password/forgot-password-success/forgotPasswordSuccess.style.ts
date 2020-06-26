@@ -53,11 +53,7 @@ export const forgotPasswordStylesSuccess = makeStyles( ( theme: Theme ) =>
 			minHeight: '350px',
 		},
 		mainTitle: {
-			fontSize: '1.5rem',
-			fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-			fontWeight: 400,
-			lineHeight: 1.33,
-			letterSpacing: '0em',
+			marginBottom: '10px'
 		},
 	} )
 )

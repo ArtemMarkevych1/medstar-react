@@ -4,14 +4,17 @@ import { forgotPasswordStyles } from './forgotPassword.style'
 import TextField from '@material-ui/core/TextField'
 import Container from '@material-ui/core/Container'
 import { Link } from 'react-router-dom'
+import Typography from '@material-ui/core/Typography'
 
 
 export const ForgotPassword = () => {
 	const classes = forgotPasswordStyles()
 
 	return (
-		<Container component="main" maxWidth="xs" className={classes.root}>
-			<h1 className={ classes.mainTitle }>Forgot Password</h1>
+		<Container component="main" maxWidth="xs" className={ classes.root }>
+			<Typography component="h1" variant="h5" className={ classes.mainTitle }>
+				Forgot Password
+			</Typography>
 			<form noValidate autoComplete="off">
 				<div className={ classes.wrapper }>
 					<p className={ classes.title }>
