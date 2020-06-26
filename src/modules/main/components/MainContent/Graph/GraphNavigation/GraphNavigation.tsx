@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { BottomNavigation, BottomNavigationAction } from '@material-ui/core';
 import { graphNavigationStyle } from './graphNavigation.style';
-import Api from '../../../../api/Api';
-import { abbrFilterType } from '../../../../models/types'
+import Api from '../../../../../../api/Api';
+import { abbrFilterType } from '../../../../../../models/types'
 
 interface IProps {
 	setAbbrFilter: React.Dispatch<React.SetStateAction<abbrFilterType>>;

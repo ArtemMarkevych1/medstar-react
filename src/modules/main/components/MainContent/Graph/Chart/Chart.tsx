@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { LineChart, ResponsiveContainer, CartesianGrid, YAxis, XAxis, Legend, Tooltip, Line, TooltipPayload } from 'recharts';
 import CustomizedAxisTick from './CustomizedAxisTick/CustomizedAxisTick';
 import { chartStyle } from './chart.style';
-import Api from '../../../../api/Api';
-import { datetimeFormat, dateTimeFormatter } from '../../../../utils/dateAndTimeFormatter'
-import { abbrFilterType, GraphDataType } from '../../../../models/types'
+import Api from '../../../../../../api/Api';
+import { datetimeFormat, dateTimeFormatter } from '../../../../../../utils/dateAndTimeFormatter'
+import { abbrFilterType, GraphDataType } from '../../../../../../models/types'
 
 interface IProps {
 	abbrFilter: abbrFilterType;

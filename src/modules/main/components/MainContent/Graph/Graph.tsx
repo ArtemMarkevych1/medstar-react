@@ -1,7 +1,7 @@
 import React from 'react';
 import GraphNavigation from './GraphNavigation/GraphNavigation';
 import Chart from './Chart/Chart';
-import { abbrFilterType } from '../../../models/types'
+import { abbrFilterType } from '../../../../../models/types'
 
 interface IProps {
 	setAbbrFilter: React.Dispatch<React.SetStateAction<abbrFilterType>>;

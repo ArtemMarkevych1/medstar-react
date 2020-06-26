@@ -1,5 +1,5 @@
 import React from 'react';
-import { datetimeFormat, dateTimeFormatter } from '../../../../../utils/dateAndTimeFormatter'
+import { datetimeFormat, dateTimeFormatter } from '../../../../../../../utils/dateAndTimeFormatter'
 
 interface IProps {
 	x: number;

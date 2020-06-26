@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Api from '../../../api/Api';
+import Api from '../../../../../api/Api';
 import { logoStyle } from './logo.style'
 
 const Logo: React.FC = () => {

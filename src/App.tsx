@@ -1,20 +1,22 @@
-import React from 'react';
-import { Container } from '@material-ui/core';
-import Logo from './components/Header/Logo/Logo';
-import Header from './components/Header/Header';
-import MainContent from './components/MainContent/MainContent';
+import React from 'react'
+import { Container } from '@material-ui/core'
+import MainModule from './modules/main/MainModule'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { AuthModule } from './modules/auth/AuthModule'
 
 const App = () => {
-  return (
-      <div className="App">
-        <Container maxWidth='xl'>
-          <Header>
-            <Logo />
-          </Header>
-          <MainContent />
-        </Container>
-      </div>
-  );
+	return (
+		<div className="App">
+			<Container maxWidth='xl'>
+				<BrowserRouter>
+					<Switch>
+						<Route path='/auth' component={ AuthModule }/>
+						<Route path='/' exact component={ MainModule }/>
+					</Switch>
+				</BrowserRouter>
+			</Container>
+		</div>
+	)
 }
 
-export default App;
+export default App

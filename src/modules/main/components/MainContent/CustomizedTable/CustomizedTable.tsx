@@ -11,8 +11,8 @@ import {
 	TableSortLabel
 } from '@material-ui/core'
 import { customTableStyle } from './customTable.style'
-import Api from '../../../api/Api'
-import { abbrFilterType, IHeadCell, OrderByType, OrderType, TableDataType } from '../../../models/types'
+import Api from '../../../../../api/Api'
+import { abbrFilterType, IHeadCell, OrderByType, OrderType, TableDataType } from '../../../../../models/types'
 
 
 const headCells: IHeadCell[] = [
