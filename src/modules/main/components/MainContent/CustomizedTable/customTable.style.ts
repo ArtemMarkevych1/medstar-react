@@ -1,7 +1,7 @@
-import { makeStyles, createStyles, Theme } from "@material-ui/core";
+import { createStyles, makeStyles, Theme } from '@material-ui/core'
 
-export const customTableStyle = makeStyles((theme: Theme) => (
-	createStyles({
+export const customTableStyle = makeStyles( ( theme: Theme ) => (
+	createStyles( {
 		tableWrapper: {
 			padding: '30px   0',
 			borderRadius: '5px',
@@ -24,7 +24,10 @@ export const customTableStyle = makeStyles((theme: Theme) => (
 			borderCollapse: 'separate',
 			borderSpacing: '2px',
 			padding: '10px',
-
+		},
+		actions: {
+			display: 'flex',
+			justifyContent: 'space-around',
 		},
 		pagination: {
 			borderTop: '1px solid rgba(0, 0, 0, 0.1)',
@@ -33,5 +36,5 @@ export const customTableStyle = makeStyles((theme: Theme) => (
 			borderCollapse: 'collapse',
 			borderStyle: 'hidden',
 		},
-	})
-))
+	} )
+) )

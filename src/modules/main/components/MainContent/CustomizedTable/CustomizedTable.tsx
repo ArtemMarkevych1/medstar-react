@@ -13,6 +13,10 @@ import {
 import { customTableStyle } from './customTable.style'
 import Api from '../../../../../api/Api'
 import { abbrFilterType, IHeadCell, OrderByType, OrderType, TableDataType } from '../../../../../models/types'
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
+import BorderColorIcon from '@material-ui/icons/BorderColor'
+import ConfirmModal from '../../../../../shared/confirm-modal/ConfirmModal'
+import UpdateForm from '../../../../../shared/update-form/UpdateForm'
 
 
 const headCells: IHeadCell[] = [
@@ -52,6 +56,10 @@ const headCells: IHeadCell[] = [
 		id: 'admittingProv',
 		name: 'Admitting Prov',
 	},
+	{
+		id: 'actions',
+		name: 'Actions'
+	}
 ]
 
 interface IProps {
@@ -62,12 +70,20 @@ const CustomizedTable: React.FC<IProps> = ( { abbrFilter } ) => {
 	const classes = customTableStyle()
 	const [ data, setData ] = useState<TableDataType[]>( [] )
 	const [ orderBy, setOrderBy ] = useState<OrderByType | ''>( '' )
-	console.log( orderBy, 'orderBy' )
 	const [ order, setOrder ] = useState<OrderType>( 'asc' )
 	const [ page, setPage ] = useState<number>( 0 )
 	const [ rowsTotalCount, setRowsTotalCount ] = useState<number>( 0 )
 	const emptyRows = 10 - data.length
+	const [ openDelete, setOpenDelete ] = React.useState( false )
+	const [ openUpdate, setOpenUpdate ] = React.useState( false )
 
+	const handleDeleteOpen = () => {
+		setOpenDelete( true )
+	}
+
+	const handleUpdateOpen = () => {
+		setOpenUpdate( true )
+	}
 
 	const setDataHandler = () => {
 		if ( orderBy ) {
@@ -152,6 +168,10 @@ const CustomizedTable: React.FC<IProps> = ( { abbrFilter } ) => {
 										<TableCell className={ classes.tableCell }>{ row.bedStatus }</TableCell>
 										<TableCell className={ classes.tableCell }>{ row.bed }</TableCell>
 										<TableCell className={ classes.tableCell }>{ row.admittingProv }</TableCell>
+										<TableCell className={ classes.actions }>
+											<BorderColorIcon onClick={ () => handleUpdateOpen() }/>
+											<DeleteForeverIcon onClick={ () => handleDeleteOpen() }/>
+										</TableCell>
 									</TableRow>
 								) }
 								{ emptyRows > 0 && (
@@ -173,6 +193,11 @@ const CustomizedTable: React.FC<IProps> = ( { abbrFilter } ) => {
 					/>
 				</Paper>
 			) }
+			<ConfirmModal title={ 'Confirm Action' } children={ 'Do you really want to delete this?' } open={ openDelete }
+						  setOpen={ setOpenDelete }/>
+			{/*<ConfirmModal title={ 'Confirm Action' } children={ 'Do you really want to update this?' } open={ openUpdate }*/}
+			{/*			  setOpen={ setOpenUpdate }/>*/}
+						  <UpdateForm open={openUpdate} setOpen={setOpenUpdate}/>
 		</div>
 	)
 }

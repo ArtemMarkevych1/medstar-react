@@ -21,5 +21,14 @@ export const signUpStyle = makeStyles(( theme: Theme) => (
 			backgroundColor: '#0462bf',
 			color: '#fff'
 		},
+		link: {
+			fontSize: '1rem',
+			fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+			fontWeight: 400,
+			lineHeight: 1.5,
+			letterSpacing: '0.00938em',
+			textDecoration: 'none',
+			color: '#0462bf'
+		}
 	} )
 ))
