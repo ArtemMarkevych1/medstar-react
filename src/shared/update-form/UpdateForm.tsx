@@ -1,25 +1,72 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
 import SharedButton from '../button/SharedButton'
 import DialogActions from '@material-ui/core/DialogActions'
 import { updateFormStyle } from './updateForm.style'
-import { TextField } from '@material-ui/core'
 import { KeyboardDatePicker, MuiPickersUtilsProvider, } from '@material-ui/pickers'
 import DateFnsUtils from '@date-io/date-fns'
+import { IHeadCell, TableDataType } from '../../models/types'
+import Api from '../../api/Api'
+import { MenuItem } from '@material-ui/core'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
-import MenuItem from '@material-ui/core/MenuItem'
+import TextField from '@material-ui/core/TextField'
+
+
+const headCells: IHeadCell[] = [
+	{
+		id: 'admitDate',
+		name: 'Admit Date',
+	},
+	{
+		id: 'unitAbbr',
+		name: 'Unit Abbr',
+	},
+	{
+		id: 'sex',
+		name: 'Sex',
+	},
+	{
+		id: 'room',
+		name: 'Room',
+	},
+	{
+		id: 'finClass',
+		name: 'Fin Class Abbr',
+	},
+	{
+		id: 'classF',
+		name: 'Class'
+	},
+	{
+		id: 'bedStatus',
+		name: 'Bed Status',
+	},
+	{
+		id: 'bed',
+		name: 'Bed',
+	},
+	{
+		id: 'admittingProv',
+		name: 'Admitting Prov',
+	},
+	{
+		id: 'actions',
+		name: 'Actions'
+	}
+]
 
 export interface UpdateFormProps {
 	open: boolean;
 	setOpen: ( event: any ) => void;
+	activeData: any
 }
 
 export type PropTypes =
 	& UpdateFormProps
 
-export default function UpdateForm( { open, setOpen }: PropTypes ) {
+export default function UpdateForm( { open, setOpen, activeData }: PropTypes ) {
 	const classes = updateFormStyle()
 
 	const [ selectedDate, setSelectedDate ] = React.useState( new Date() )
@@ -71,6 +118,22 @@ export default function UpdateForm( { open, setOpen }: PropTypes ) {
 		e.preventDefault()
 	}
 
+	const [ data, setData ] = useState<TableDataType[]>( [] )
+
+
+	const setDataHandler = () => {
+		Api.getUpdateTableData()
+			.then( res => {
+				setData( res.data.result )
+
+			} )
+			.catch( err => console.error( err ) )
+	}
+
+	useEffect( () => {
+		setDataHandler()
+	}, [] )
+
 	return (
 		<Dialog
 			classes={ {
@@ -99,155 +162,39 @@ export default function UpdateForm( { open, setOpen }: PropTypes ) {
 							/>
 						</MuiPickersUtilsProvider>
 					</div>
-					<div className={ classes.formField }>
-						<label className={ classes.label } htmlFor="unitAbbr">Unit Abbr</label>
-						<FormControl className={ classes.formControl }>
-							<Select
-								value={ unitAbbr }
-								onChange={ handleUnitAbbrChange }
-								displayEmpty
-								className={ classes.selectEmpty }
-								inputProps={ { 'aria-label': 'Without label' } }
-							>
-								<MenuItem value="">
-									<em>{ '' }</em>
-								</MenuItem>
-								<MenuItem value={ 10 }>Ten</MenuItem>
-								<MenuItem value={ 20 }>Twenty</MenuItem>
-								<MenuItem value={ 30 }>Thirty</MenuItem>
-							</Select>
-						</FormControl>
-					</div>
+
+					{ activeData && Object.keys( activeData )
+						.filter( el => el !== 'censusDate' && el !== 'admitDate' && el !== 'admittingProv' && el !== 'patientMRN' && el!== 'id' )
+						.map( ( row: any, index ) => {
+								return (
+									<div className={ classes.formField } key={ index }>
+										<label className={ classes.label } htmlFor="">{ row }</label>
+										<FormControl className={ classes.formControl }>
+											<Select
+												value={ '' }
+												onChange={ handleRoomChange }
+												displayEmpty
+												className={ classes.selectEmpty }
+												inputProps={ { 'aria-label': 'Without label' } }
+											>
+												<MenuItem value="">
+													<em className={ classes.placeholder }>{ activeData[row] }</em>
+												</MenuItem>
+												<MenuItem value={ 10 }>Ten</MenuItem>
+												<MenuItem value={ 20 }>Twenty</MenuItem>
+												<MenuItem value={ 30 }>Thirty</MenuItem>
+											</Select>
+										</FormControl>
+									</div>
+								)
+							}
+						)
+					}
 
 					<div className={ classes.formField }>
-						<label className={ classes.label } htmlFor="unitAbbr">Sex</label>
-						<FormControl className={ classes.formControl }>
-							<Select
-								value={ sex }
-								onChange={ handleSexChange }
-								displayEmpty
-								className={ classes.selectEmpty }
-								inputProps={ { 'aria-label': 'Without label' } }
-							>
-								<MenuItem value="">
-									<em>{ '' }</em>
-								</MenuItem>
-								<MenuItem value={ 10 }>Ten</MenuItem>
-								<MenuItem value={ 20 }>Twenty</MenuItem>
-								<MenuItem value={ 30 }>Thirty</MenuItem>
-							</Select>
-						</FormControl>
+						<label className={ classes.labelAdress } htmlFor="admitDate">Admitting Prov</label>
+						<TextField className={classes.textField} id="standard-basic" label="Write address here"/>
 					</div>
-
-					<div className={ classes.formField }>
-						<label className={ classes.label } htmlFor="unitAbbr">Room</label>
-						<FormControl className={ classes.formControl }>
-							<Select
-								value={ room }
-								onChange={ handleRoomChange }
-								displayEmpty
-								className={ classes.selectEmpty }
-								inputProps={ { 'aria-label': 'Without label' } }
-							>
-								<MenuItem value="">
-									<em>{ '' }</em>
-								</MenuItem>
-								<MenuItem value={ 10 }>Ten</MenuItem>
-								<MenuItem value={ 20 }>Twenty</MenuItem>
-								<MenuItem value={ 30 }>Thirty</MenuItem>
-							</Select>
-						</FormControl>
-					</div>
-
-					<div className={ classes.formField }>
-						<label className={ classes.label } htmlFor="unitAbbr">Fin Class Abbr</label>
-						<FormControl className={ classes.formControl }>
-							<Select
-								value={ finClass }
-								onChange={ handleFinClassChange }
-								displayEmpty
-								className={ classes.selectEmpty }
-								inputProps={ { 'aria-label': 'Without label' } }
-							>
-								<MenuItem value="">
-									<em>{ '' }</em>
-								</MenuItem>
-								<MenuItem value={ 10 }>Ten</MenuItem>
-								<MenuItem value={ 20 }>Twenty</MenuItem>
-								<MenuItem value={ 30 }>Thirty</MenuItem>
-							</Select>
-						</FormControl>
-					</div>
-
-					<div className={ classes.formField }>
-						<label className={ classes.label } htmlFor="unitAbbr">Class</label>
-						<FormControl className={ classes.formControl }>
-							<Select
-								value={ classF }
-								onChange={ handleClassFChange }
-								displayEmpty
-								className={ classes.selectEmpty }
-								inputProps={ { 'aria-label': 'Without label' } }
-							>
-								<MenuItem value="">
-									<em>{ '' }</em>
-								</MenuItem>
-								<MenuItem value={ 10 }>Ten</MenuItem>
-								<MenuItem value={ 20 }>Twenty</MenuItem>
-								<MenuItem value={ 30 }>Thirty</MenuItem>
-							</Select>
-						</FormControl>
-					</div>
-
-					<div className={ classes.formField }>
-						<label className={ classes.label } htmlFor="unitAbbr">Bed Status</label>
-						<FormControl className={ classes.formControl }>
-							<Select
-								value={ bedStatus }
-								onChange={ handleBedStatusChange }
-								displayEmpty
-								className={ classes.selectEmpty }
-								inputProps={ { 'aria-label': 'Without label' } }
-							>
-								<MenuItem value="">
-									<em>{ '' }</em>
-								</MenuItem>
-								<MenuItem value={ 10 }>Ten</MenuItem>
-								<MenuItem value={ 20 }>Twenty</MenuItem>
-								<MenuItem value={ 30 }>Thirty</MenuItem>
-							</Select>
-						</FormControl>
-					</div>
-
-					<div className={ classes.formField }>
-						<label className={ classes.label } htmlFor="unitAbbr">Bed</label>
-						<FormControl className={ classes.formControl }>
-							<Select
-								value={ bed }
-								onChange={ handleBedChange }
-								displayEmpty
-								className={ classes.selectEmpty }
-								inputProps={ { 'aria-label': 'Without label' } }
-							>
-								<MenuItem value="">
-									<em>{ '' }</em>
-								</MenuItem>
-								<MenuItem value={ 10 }>Ten</MenuItem>
-								<MenuItem value={ 20 }>Twenty</MenuItem>
-								<MenuItem value={ 30 }>Thirty</MenuItem>
-							</Select>
-						</FormControl>
-					</div>
-					<div className={ classes.formField }>
-						<label className={ classes.labelAdress } htmlFor="unitAbbr">Admitting Prov</label>
-						<FormControl className={ classes.formControlAdress }>
-							<TextField id="standard-basic" value={ admittingProv }
-									   onChange={ handleAdmittingProv } className={ classes.selectEmpty }
-									   label="Write address here"
-							/>
-						</FormControl>
-					</div>
-
 				</form>
 			</DialogContent>
 			<DialogActions className={ classes.dialogActions }>

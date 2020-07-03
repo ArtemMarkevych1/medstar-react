@@ -10,11 +10,11 @@ export const updateFormStyle = makeStyles( ( theme: Theme ) => (
 		formField: {
 			display: 'flex',
 			justifyContent: 'space-between',
-			marginBottom: '10px'
+			marginBottom: '10px',
 		},
 		formControl: {
 			margin: theme.spacing( 1 ),
-			minWidth: 150,
+			width: '50%'
 		},
 		formControlAdress:{
 			margin: theme.spacing( 1 ),
@@ -31,7 +31,7 @@ export const updateFormStyle = makeStyles( ( theme: Theme ) => (
 		labelAdress:{
 			marginRight: '15px',
 			display: 'block',
-			marginTop:'50px'
+			marginTop:'30px'
 		},
 		labelPicker:{
 			marginRight: '15px',
@@ -39,6 +39,13 @@ export const updateFormStyle = makeStyles( ( theme: Theme ) => (
 			marginTop: '29px'
 		},
 		dialog: {
-			minWidth: '450px'
+			minWidth: '450px',
+		},
+		placeholder: {
+			fontStyle: 'normal'
+		},
+		textField:{
+			width: '50%',
+			marginRight: '6px'
 		}
 	} ) ) )

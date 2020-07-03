@@ -77,12 +77,16 @@ const CustomizedTable: React.FC<IProps> = ( { abbrFilter } ) => {
 	const [ openDelete, setOpenDelete ] = React.useState( false )
 	const [ openUpdate, setOpenUpdate ] = React.useState( false )
 
-	const handleDeleteOpen = () => {
-		setOpenDelete( true )
+	const [ activeData, setActiveData ] = React.useState()
+
+	const handleUpdateOpen = ( rowId: string ): void => {
+		setOpenUpdate( true )
+		setActiveData( data.find( row => row.id === rowId ) )
 	}
 
-	const handleUpdateOpen = () => {
-		setOpenUpdate( true )
+	const handleDeleteOpen = ( id: string ) => {
+		setOpenDelete( true )
+		console.log( 'id', id )
 	}
 
 	const setDataHandler = () => {
@@ -155,7 +159,7 @@ const CustomizedTable: React.FC<IProps> = ( { abbrFilter } ) => {
 								</TableRow>
 							</TableHead>
 							<TableBody>
-								{ data.length > 0 && data.map( row =>
+								{ data.length > 0 && data.map( ( row ) =>
 									<TableRow key={ row.id }>
 										<TableCell className={ classes.tableCell } component="th" scope="row">
 											{ row.admitDate }
@@ -169,8 +173,8 @@ const CustomizedTable: React.FC<IProps> = ( { abbrFilter } ) => {
 										<TableCell className={ classes.tableCell }>{ row.bed }</TableCell>
 										<TableCell className={ classes.tableCell }>{ row.admittingProv }</TableCell>
 										<TableCell className={ classes.actions }>
-											<BorderColorIcon onClick={ () => handleUpdateOpen() }/>
-											<DeleteForeverIcon onClick={ () => handleDeleteOpen() }/>
+											<BorderColorIcon onClick={ () => handleUpdateOpen( row.id ) }/>
+											<DeleteForeverIcon onClick={ () => handleDeleteOpen( row.id ) }/>
 										</TableCell>
 									</TableRow>
 								) }
@@ -193,11 +197,10 @@ const CustomizedTable: React.FC<IProps> = ( { abbrFilter } ) => {
 					/>
 				</Paper>
 			) }
-			<ConfirmModal title={ 'Confirm Action' } children={ 'Do you really want to delete this?' } open={ openDelete }
+			<ConfirmModal title={ 'Confirm Action' } children={ 'Do you really want to delete this?' }
+						  open={ openDelete }
 						  setOpen={ setOpenDelete }/>
-			{/*<ConfirmModal title={ 'Confirm Action' } children={ 'Do you really want to update this?' } open={ openUpdate }*/}
-			{/*			  setOpen={ setOpenUpdate }/>*/}
-						  <UpdateForm open={openUpdate} setOpen={setOpenUpdate}/>
+			<UpdateForm open={ openUpdate } setOpen={ setOpenUpdate } activeData={ activeData }/>
 		</div>
 	)
 }
